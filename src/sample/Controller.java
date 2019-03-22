@@ -1,20 +1,17 @@
 package sample;
 
 import com.sun.javafx.perf.PerformanceTracker;
-import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
@@ -25,8 +22,7 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
     @FXML private Canvas mainCanvas;
 
-    //Image pilota;
-    private Pilota pilota;
+    private Platform platform;
     private GraphicsContext gc;
     private Scene scene;
 
@@ -44,13 +40,13 @@ public class Controller implements Initializable {
         scene = sc;
         scene.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.A) {
-                pilota.clear(gc);
-                pilota.changeDir("left");
-                pilota.render(gc);
+                platform.clear(gc);
+                platform.changeDir("left");
+                platform.render(gc);
             }else if (e.getCode() == KeyCode.D){
-                pilota.clear(gc);
-                pilota.changeDir("right");
-                pilota.render(gc);
+                platform.clear(gc);
+                platform.changeDir("right");
+                platform.render(gc);
 
             }
         });
@@ -58,7 +54,7 @@ public class Controller implements Initializable {
 //            @Override
 //            public void handle(MouseEvent mouseEvent) {
 //                Point2D point = new Point2D(mouseEvent.getX(),mouseEvent.getY());
-//                if(pilota.isClicked(point)) pilota.changeDir();
+//                if(platform.isClicked(point)) platform.changeDir();
 //                System.out.println("click");
 //            }
 //        });
@@ -69,11 +65,11 @@ public class Controller implements Initializable {
         gc = mainCanvas.getGraphicsContext2D();
         gc.setFill(Color.RED);
 
-        pilota = new Pilota();
+        platform = new Platform();
 
 
-        pilota.setImage(new Image("sample/ball.png"));
-        pilota.render(gc);
+        platform.setImage(new Image("sample/26517.png"));
+        platform.render(gc);
 //        timeline.setCycleCount(Timeline.INDEFINITE);
 //        timeline.play();
 

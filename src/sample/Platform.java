@@ -6,12 +6,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Pilota {
+public class Platform {
     private Image image;
     private double posX, posY, velX, velY, width, height;
     private int dirX, dirY;
 
-    public Pilota() {
+    public Platform() {
         this.posX = 0.0f;
         this.posY = 0.0f;
         this.velX = 5.0f;
@@ -20,7 +20,7 @@ public class Pilota {
         this.dirY = 1;
     }
 
-    public Pilota(double x, double y) {
+    public Platform(double x, double y) {
         this.posX = x;
         this.posY = y;
         this.velX = 4.0f;
