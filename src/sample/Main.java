@@ -22,6 +22,7 @@ public class Main extends Application {
         stage.setTitle("Rebota");
         stage.show();
 
+        controller.moverPelota();
 
     }
 
