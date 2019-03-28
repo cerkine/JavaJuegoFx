@@ -29,7 +29,13 @@ public class Platform {
         this.dirY = 1;
     }
 
+    public double getWidth() {
+        return width;
+    }
 
+    public double getHeight() {
+        return height;
+    }
 
     public void move() {
 //        if(dirX == 1) {
@@ -97,5 +103,10 @@ public class Platform {
             case "DOWN": dirY = 1; break;
             case "UP": dirY = -1;break;
         }
+    }
+
+    public void setInitialValue(double x, double y) {
+        posX = x;
+        posY = y;
     }
 }
