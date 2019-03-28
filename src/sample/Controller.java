@@ -16,8 +16,6 @@ import javafx.scene.paint.Color;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
-
 public class Controller implements Initializable {
     @FXML private Canvas mainCanvas;
 
@@ -28,12 +26,8 @@ public class Controller implements Initializable {
 
     private BooleanBinding anyPressed = aPressed.or(dPressed.or(leftPressed.or(rightPressed)));
 
-
-
-
-    //Image pilota;
-    private Pilota pilota;
-    private Pilota pilota2;
+    private Platform pilota;
+    private Platform pilota2;
     private GraphicsContext gc;
     private Scene scene;
 
@@ -66,29 +60,6 @@ public class Controller implements Initializable {
 
     public void setScene(Scene sc) {
         scene = sc;
-//        scene.setOnKeyPressed(e -> {
-//            if (e.getCode() == KeyCode.A) {
-//                pilota.clear(gc);
-//                pilota.changeDir("left");
-//                pilota.render(gc);
-//            }else if (e.getCode() == KeyCode.D){
-//                pilota.clear(gc);
-//                pilota.changeDir("right");
-//                pilota.render(gc);
-//
-//            }
-//
-//            if (e.getCode() == KeyCode.LEFT) {
-//                pilota2.clear(gc);
-//                pilota2.changeDir("left");
-//                pilota2.render(gc);
-//            }else if (e.getCode() == KeyCode.RIGHT){
-//                pilota2.clear(gc);
-//                pilota2.changeDir("right");
-//                pilota2.render(gc);
-//
-//            }
-//        });
 
         scene.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.LEFT) {
@@ -109,7 +80,6 @@ public class Controller implements Initializable {
 
         });
         anyPressed.addListener((obs, wasPressed, isNowPressed) -> {
-            System.out.println(anyPressed.get()+"   "+aPressed.get()+ "  "+ isNowPressed);
             if (isNowPressed) {
                 timer.start();
             } else {
@@ -137,11 +107,11 @@ public class Controller implements Initializable {
 
     }
 
-    public void setPilota(Pilota pilota) {
+    public void setPilota(Platform pilota) {
         this.pilota = pilota;
     }
 
-    public Pilota getPilota() {
+    public Platform getPilota() {
         return pilota;
     }
 
@@ -158,14 +128,14 @@ public class Controller implements Initializable {
         gc = mainCanvas.getGraphicsContext2D();
         gc.setFill(Color.RED);
 
-        pilota = new Pilota();
-        pilota2 = new Pilota();
+        pilota = new Platform();
+        pilota2 = new Platform();
 
-        pilota.setImage(new Image("sample/ball.png"));
+        pilota.setImage(new Image("sample/platform.png"));
         pilota.setInitialValue(scene.getWidth()/2-pilota.getWidth()/2,scene.getHeight()-pilota.getHeight());
         pilota.render(gc);
 
-        pilota2.setImage(new Image("sample/ball.png"));
+        pilota2.setImage(new Image("sample/platform.png"));
         pilota2.setInitialValue(scene.getWidth()/2-pilota.getWidth()/2,0);
         pilota2.render(gc);
     }
