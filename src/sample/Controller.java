@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.animation.AnimationTimer;
+import javafx.animation.Timeline;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -26,8 +27,9 @@ public class Controller implements Initializable {
 
     private BooleanBinding anyPressed = aPressed.or(dPressed.or(leftPressed.or(rightPressed)));
 
-    private Platform pilota;
-    private Platform pilota2;
+    private Platform platform;
+    private Platform platform2;
+    private Pelota pelota;
     private GraphicsContext gc;
     private Scene scene;
 
@@ -35,24 +37,24 @@ public class Controller implements Initializable {
         @Override
         public void handle(long timestamp) {
             if (leftPressed.get()) {
-                pilota.clear(gc);
-                pilota.changeDir("left");
-                pilota.render(gc);
+                platform.clear(gc);
+                platform.changeDir("left");
+                platform.render(gc);
             }
             if (rightPressed.get()) {
-                pilota.clear(gc);
-                pilota.changeDir("right");
-                pilota.render(gc);
+                platform.clear(gc);
+                platform.changeDir("right");
+                platform.render(gc);
             }
             if (aPressed.get()) {
-                pilota2.clear(gc);
-                pilota2.changeDir("left");
-                pilota2.render(gc);
+                platform2.clear(gc);
+                platform2.changeDir("left");
+                platform2.render(gc);
             }
             if (dPressed.get()) {
-                pilota2.clear(gc);
-                pilota2.changeDir("right");
-                pilota2.render(gc);
+                platform2.clear(gc);
+                platform2.changeDir("right");
+                platform2.render(gc);
             }
         }
     };
@@ -107,12 +109,12 @@ public class Controller implements Initializable {
 
     }
 
-    public void setPilota(Platform pilota) {
-        this.pilota = pilota;
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
     }
 
-    public Platform getPilota() {
-        return pilota;
+    public Platform getPlatform() {
+        return platform;
     }
 
     public GraphicsContext getGc() {
@@ -124,19 +126,29 @@ public class Controller implements Initializable {
 
     }
 
-    public void moverPelota() {
+    public void controlPlataformas() {
         gc = mainCanvas.getGraphicsContext2D();
         gc.setFill(Color.RED);
 
-        pilota = new Platform();
-        pilota2 = new Platform();
+        platform = new Platform();
+        platform2 = new Platform();
 
-        pilota.setImage(new Image("sample/platform.png"));
-        pilota.setInitialValue(scene.getWidth()/2-pilota.getWidth()/2,scene.getHeight()-pilota.getHeight());
-        pilota.render(gc);
+        platform.setImage(new Image("sample/platform.png"));
+        platform.setInitialValue(scene.getWidth()/2- platform.getWidth()/2,scene.getHeight()- platform.getHeight());
+        platform.render(gc);
 
-        pilota2.setImage(new Image("sample/platform.png"));
-        pilota2.setInitialValue(scene.getWidth()/2-pilota.getWidth()/2,0);
-        pilota2.render(gc);
+        platform2.setImage(new Image("sample/platform2.png"));
+        platform2.setInitialValue(scene.getWidth()/2- platform.getWidth()/2,0);
+        platform2.render(gc);
+    }
+
+    public void movimientoPelotas(){
+        gc = mainCanvas.getGraphicsContext2D();
+        gc.setFill(Color.RED);
+
+        pelota = new Pelota();
+
+        pelota.setImage(new Image("img/ball.png"));
+
     }
 }
