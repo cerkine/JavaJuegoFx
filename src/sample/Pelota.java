@@ -20,17 +20,6 @@ public class Pelota {
         this.dirY = 1;
     }
 
-    public Pelota(double x, double y) {
-        this.posX = x;
-        this.posY = y;
-        this.velX = 4.0f;
-        this.velY = 4.0f;
-        this.dirX = 1;
-        this.dirY = 1;
-    }
-
-
-
     public void move() {
         if(dirX == 1) {
             posX += velX;
@@ -41,17 +30,16 @@ public class Pelota {
         }
         if(dirY == 1){
             posY += velY;
-            if(posY>=500-height) dirY = (-1)*dirY;
+            //if(posY>=500-height) dirY = (-1)*dirY;
         }
         else {
             posY -= velY;
-            if(posY<=0) dirY = (-1)*dirY;
+            //if(posY<=0) dirY = (-1)*dirY;
         }
     }
 
     public void render(GraphicsContext gc) {
         gc.drawImage(image, posX, posY);
-        //System.out.println(posX + ":" + posY);
     }
 
     public void setImage(Image i) {
@@ -68,10 +56,6 @@ public class Pelota {
         return new Rectangle2D(posX,posY,width,height);
     }
 
-    public boolean isClicked(Point2D p) {
-        if(getBoundary().contains(p)) return true;
-        else return false;
-    }
 
     public void changeDir() {
         double t = Math.random();
@@ -84,12 +68,12 @@ public class Pelota {
 
     }
 
-    public void setDirection(String direction) {
-        switch (direction) {
-            case "RIGHT": dirX = 1;  break;
-            case "LEFT": dirX= -1; break;
-            case "DOWN": dirY = 1; break;
-            case "UP": dirY = -1;break;
-        }
-    }
+//    public void setDirection(String direction) {
+//        switch (direction) {
+//            case "RIGHT": dirX = 1;  break;
+//            case "LEFT": dirX= -1; break;
+//            case "DOWN": dirY = 1; break;
+//            case "UP": dirY = -1;break;
+//        }
+//    }
 }

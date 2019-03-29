@@ -23,7 +23,7 @@ public class Main extends Application {
         stage.show();
 
         controller.controlPlataformas();
-        //controller.movimientoPelotas();
+        controller.movimientoPelotas();
 
     }
 

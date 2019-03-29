@@ -1,10 +1,14 @@
 package sample;
 
+import com.sun.javafx.perf.PerformanceTracker;
 import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -13,6 +17,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -58,6 +63,25 @@ public class Controller implements Initializable {
             }
         }
     };
+
+    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.017), new EventHandler<ActionEvent>(){
+        @Override
+        public void handle(ActionEvent event) {
+            PerformanceTracker perfTracker = PerformanceTracker.getSceneTracker(mainCanvas.getScene());
+            // System.out.println(("FPS (Timeline) = " + perfTracker.getInstantFPS()));
+            pelota.clear(gc);
+            pelota.move();
+            if (pelota.getBoundary().intersects(platform.getBoundary())){
+                pelota.changeDir();
+            }
+            else if (pelota.getBoundary().intersects(platform2.getBoundary())){
+                pelota.changeDir();
+            }
+            pelota.render(gc);
+
+        }
+    })
+    );
 
 
     public void setScene(Scene sc) {
@@ -148,7 +172,10 @@ public class Controller implements Initializable {
 
         pelota = new Pelota();
 
-        pelota.setImage(new Image("img/ball.png"));
+        pelota.setImage(new Image("sample/ball.png"));
+
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
 
     }
 }
