@@ -18,8 +18,8 @@ public class Pelota {
     public Pelota() {
         this.posX = 0.0f;
         this.posY = 0.0f;
-        this.velX = 1.0f;
-        this.velY = 1.0f;
+        this.velX = 2.0f;
+        this.velY = 2.0f;
         this.dirX = 1;
         this.dirY = 1;
     }
