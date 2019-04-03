@@ -47,6 +47,7 @@ public class Controller implements Initializable {
     private Platform platform4;
 
     private Pelota pelota;
+
     private GraphicsContext gc;
     private Scene scene;
 
@@ -107,25 +108,30 @@ public class Controller implements Initializable {
                 pelota.setPosY(scene.getHeight()-platform2.getHeight()-pelota.getImage().getHeight()-separacion);
                 pelota.render(gc);
                 pelota.changeDir();
+                pelota.setPunto("azul");
 
             }
             else if (pelota.getBoundary().intersects(platform4.getBoundary())){
                 pelota.setPosY(platform4.getHeight()+separacion);
                 pelota.render(gc);
                 pelota.changeDir();
+                pelota.setPunto("amarillo");
+
 
             }
             else if (pelota.getBoundary().intersects(platform3.getBoundary())){
                 pelota.setPosX((scene.getWidth()-platform3.getWidth()-pelota.getImage().getHeight()-separacion));
                 pelota.render(gc);
                 pelota.changeDir();
+                pelota.setPunto("verde");
+
 
             }
             else if (pelota.getBoundary().intersects(platform.getBoundary())){
                 pelota.setPosX(platform.getWidth()+separacion);
                 pelota.render(gc);
                 pelota.changeDir();
-
+                pelota.setPunto("rojo");
             }
             pelota.render(gc);
             platform.render(gc);

@@ -8,11 +8,17 @@ import javafx.scene.image.ImageView;
 
 public class Pelota {
     private Image image;
+    private String punto;
     private double posX, posY, velX, velY, width, height;
+    private int[] puntos;
     private int dirX, dirY;
 
     public Image getImage() {
         return image;
+    }
+
+    public void setPunto(String punto) {
+        this.punto = punto;
     }
 
     public Pelota() {
@@ -22,6 +28,8 @@ public class Pelota {
         this.velY = 2.0f;
         this.dirX = 1;
         this.dirY = 1;
+        puntos = new int[4];
+        punto = "";
     }
 
     public void setPosX(double posX) {
@@ -35,18 +43,19 @@ public class Pelota {
     public void move() {
         if(dirX == 1) {
             posX += velX;
-            //if(posX>=400-width) dirX = (-1)*dirX;
+            if(posX>=400-width) calcularPunto();
+
         }else {
             posX -= velX;
-            //if(posX<=0) dirX = (-1)*dirX;
+            if(posX<=0) calcularPunto();
         }
         if(dirY == 1){
             posY += velY;
-            //if(posY>=500-height) dirY = (-1)*dirY;
+            if(posY>=500-height)calcularPunto();
         }
         else {
             posY -= velY;
-            //if(posY<=0) dirY = (-1)*dirY;
+            if(posY<=0)calcularPunto();
         }
     }
 
@@ -78,6 +87,23 @@ public class Pelota {
             dirX = dirX*(-1);
         }
 
+    }
+
+    public void calcularPunto(){
+        switch (punto){
+            case "azul":
+                puntos[0]++;
+                break;
+            case "verde":
+                puntos[1]++;
+                break;
+            case "rojo":
+                puntos[2]++;
+                break;
+            case "amarillo":
+                puntos[3]++;
+                break;
+        }
     }
 
 //    public void setDirection(String direction) {
