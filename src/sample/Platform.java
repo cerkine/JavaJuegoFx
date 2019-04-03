@@ -7,12 +7,12 @@ import javafx.scene.image.Image;
 
 public class Platform {
     private Image image;
-    private double posX, posY, velX, width, height;
+    private double posX, posY, velX,velY, width, height;
 
     public Platform() {
         this.posX = 0.0f;
         this.posY = 0.0f;
-        this.velX = 5.0f;
+        this.velX = this.velY = 5.0f;
     }
 
 
@@ -49,6 +49,10 @@ public class Platform {
             posX -= velX;
         } else if (direction.equals("right")) {
             posX += velX;
+        }else if (direction.equals("down")) {
+            posY += velY;
+        }else if (direction.equals("up")) {
+            posY -= velY;
         }
 
     }
