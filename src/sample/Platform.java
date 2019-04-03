@@ -9,6 +9,14 @@ public class Platform {
     private Image image;
     private double posX, posY, velX,velY, width, height;
 
+    public void setPosX(double posX) {
+        this.posX = posX;
+    }
+
+    public double getPosX() {
+        return posX;
+    }
+
     public Platform() {
         this.posX = 0.0f;
         this.posY = 0.0f;
@@ -60,5 +68,9 @@ public class Platform {
     public void setInitialValue(double x, double y) {
         posX = x;
         posY = y;
+    }
+
+    public double getPosY() {
+        return posY;
     }
 }

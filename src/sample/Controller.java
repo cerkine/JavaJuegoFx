@@ -25,6 +25,7 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
     @FXML private Canvas mainCanvas;
     final int separacion = 10;
+    Image esquina;
 
     private BooleanProperty leftPressed = new SimpleBooleanProperty();
     private BooleanProperty rightPressed = new SimpleBooleanProperty();
@@ -46,6 +47,11 @@ public class Controller implements Initializable {
     private Platform platform3;
     private Platform platform4;
 
+    private Platform esqDerArri;
+    private Platform esqDerAbaj;
+    private Platform esqIzqArri;
+    private Platform esqIzqAbaj;
+
     private Pelota pelota;
 
     private GraphicsContext gc;
@@ -56,45 +62,66 @@ public class Controller implements Initializable {
         public void handle(long timestamp) {
             if (leftPressed.get()) {
                 platform2.clear(gc);
-                platform2.changeDir("left");
+                if (!(platform2.getPosX()<esquina.getWidth())){
+                    platform2.changeDir("left");
+                }
                 platform2.render(gc);
             }
             if (rightPressed.get()) {
                 platform2.clear(gc);
-                platform2.changeDir("right");
+                if (!(platform2.getPosX()>scene.getWidth()-esquina.getWidth()-platform2.getWidth())){
+                    platform2.changeDir("right");
+                }
                 platform2.render(gc);
             }
             if (aPressed.get()) {
                 platform.clear(gc);
-                platform.changeDir("down");
+                if (!(platform.getPosY()>scene.getHeight()-esquina.getHeight()-platform.getHeight())) {
+                    platform.changeDir("down");
+                }
                 platform.render(gc);
             }
             if (qPressed.get()) {
                 platform.clear(gc);
-                platform.changeDir("up");
+                if (!(platform.getPosY()<esquina.getHeight())) {
+                    platform.changeDir("up");
+                }
                 platform.render(gc);
             }
             if (seisPressed.get()) {
                 platform3.clear(gc);
-                platform3.changeDir("down");
+                if (!(platform3.getPosY()>scene.getHeight()-esquina.getHeight()-platform3.getHeight())) {
+                    platform3.changeDir("down");
+                }
                 platform3.render(gc);
             }
             if (nuevePressed.get()) {
                 platform3.clear(gc);
-                platform3.changeDir("up");
+                if (!(platform3.getPosY()<esquina.getHeight())) {
+                    platform3.changeDir("up");
+                }
                 platform3.render(gc);
             }
             if (vPressed.get()) {
                 platform4.clear(gc);
-                platform4.changeDir("left");
+                if (!(platform4.getPosX()<esquina.getWidth())) {
+                    platform4.changeDir("left");
+                }
                 platform4.render(gc);
             }
             if (bPressed.get()) {
                 platform4.clear(gc);
-                platform4.changeDir("right");
+                if (!(platform4.getPosX()>scene.getWidth()-esquina.getHeight()-platform4.getWidth())) {
+                    platform4.changeDir("right");
+                }
                 platform4.render(gc);
             }
+            esqIzqAbaj.render(gc);
+            esqDerAbaj.render(gc);
+            esqIzqArri.render(gc);
+            esqDerArri.render(gc);
         }
+
     };
 
     Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.017), new EventHandler<ActionEvent>(){
@@ -234,6 +261,27 @@ public class Controller implements Initializable {
     public void controlPlataformas() {
         gc = mainCanvas.getGraphicsContext2D();
         gc.setFill(Color.RED);
+
+        esqDerAbaj = new Platform();
+        esqDerArri = new Platform();
+        esqIzqAbaj = new Platform();
+        esqIzqArri = new Platform();
+        esquina = new Image("sample/esquina.png");
+
+        esqIzqArri.setImage(esquina);
+        esqIzqAbaj.setImage(esquina);
+        esqDerArri.setImage(esquina);
+        esqDerAbaj.setImage(esquina);
+
+        esqIzqAbaj.setInitialValue(0,scene.getHeight()-esquina.getHeight());
+        esqDerAbaj.setInitialValue(scene.getWidth()-esquina.getWidth(),scene.getHeight()-esquina.getHeight());
+        esqDerArri.setInitialValue(scene.getWidth()-esquina.getWidth(),0);
+        esqIzqArri.setInitialValue(0,0);
+
+        esqIzqAbaj.render(gc);
+        esqDerAbaj.render(gc);
+        esqDerArri.render(gc);
+        esqIzqArri.render(gc);
 
         platform = new Platform();
         platform2 = new Platform();
