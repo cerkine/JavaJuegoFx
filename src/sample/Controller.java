@@ -14,9 +14,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -120,6 +122,9 @@ public class Controller implements Initializable {
             esqDerAbaj.render(gc);
             esqIzqArri.render(gc);
             esqDerArri.render(gc);
+
+
+
         }
 
     };
@@ -236,7 +241,6 @@ public class Controller implements Initializable {
                 nuevePressed.set(false);
             }
         });
-
 
 
     }

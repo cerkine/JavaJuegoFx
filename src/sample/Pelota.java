@@ -21,6 +21,10 @@ public class Pelota {
         this.punto = punto;
     }
 
+    public int[] getPuntos() {
+        return puntos;
+    }
+
     public Pelota() {
         this.posX = 0.0f;
         this.posY = 0.0f;
@@ -29,6 +33,9 @@ public class Pelota {
         this.dirX = 1;
         this.dirY = 1;
         puntos = new int[4];
+        for (int i = 0; i < puntos.length; i++) {
+            puntos[i] = 0;
+        }
         punto = "";
     }
 
