@@ -11,13 +11,25 @@ public class Pelota {
     private double posX, posY, velX, velY, width, height;
     private int dirX, dirY;
 
+    public Image getImage() {
+        return image;
+    }
+
     public Pelota() {
         this.posX = 0.0f;
         this.posY = 0.0f;
-        this.velX = 1.0f;
-        this.velY = 1.0f;
+        this.velX = 3.0f;
+        this.velY = 3.0f;
         this.dirX = 1;
         this.dirY = 1;
+    }
+
+    public double getPosY() {
+        return posY;
+    }
+
+    public void setPosY(double posY) {
+        this.posY = posY;
     }
 
     public void move() {

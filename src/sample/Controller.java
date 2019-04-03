@@ -72,12 +72,20 @@ public class Controller implements Initializable {
             pelota.clear(gc);
             pelota.move();
             if (pelota.getBoundary().intersects(platform.getBoundary())){
+                pelota.setPosY(scene.getHeight()-platform2.getHeight()-pelota.getImage().getHeight());
+                pelota.render(gc);
                 pelota.changeDir();
+
             }
             else if (pelota.getBoundary().intersects(platform2.getBoundary())){
+                pelota.setPosY(platform2.getHeight());
+                pelota.render(gc);
                 pelota.changeDir();
+
             }
             pelota.render(gc);
+            platform.render(gc);
+            platform2.render(gc);
 
         }
     })
