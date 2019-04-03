@@ -20,7 +20,6 @@ public class Main extends Application {
         controller.setScene(sc);
 
         stage.setScene(sc);
-        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
 
         controller.controlPlataformas();

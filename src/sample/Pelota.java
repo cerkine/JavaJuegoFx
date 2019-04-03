@@ -18,14 +18,14 @@ public class Pelota {
     public Pelota() {
         this.posX = 0.0f;
         this.posY = 0.0f;
-        this.velX = 3.0f;
-        this.velY = 3.0f;
+        this.velX = 1.0f;
+        this.velY = 1.0f;
         this.dirX = 1;
         this.dirY = 1;
     }
 
-    public double getPosY() {
-        return posY;
+    public void setPosX(double posX) {
+        this.posX = posX;
     }
 
     public void setPosY(double posY) {
@@ -35,10 +35,10 @@ public class Pelota {
     public void move() {
         if(dirX == 1) {
             posX += velX;
-            if(posX>=400-width) dirX = (-1)*dirX;
+            //if(posX>=400-width) dirX = (-1)*dirX;
         }else {
             posX -= velX;
-            if(posX<=0) dirX = (-1)*dirX;
+            //if(posX<=0) dirX = (-1)*dirX;
         }
         if(dirY == 1){
             posY += velY;

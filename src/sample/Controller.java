@@ -103,14 +103,26 @@ public class Controller implements Initializable {
             // System.out.println(("FPS (Timeline) = " + perfTracker.getInstantFPS()));
             pelota.clear(gc);
             pelota.move();
-            if (pelota.getBoundary().intersects(platform.getBoundary())){
-                pelota.setPosY(scene.getHeight()-platform2.getHeight()-pelota.getImage().getHeight());
+            if (pelota.getBoundary().intersects(platform2.getBoundary())){
+                pelota.setPosY(scene.getHeight()-platform2.getHeight()-pelota.getImage().getHeight()-separacion);
                 pelota.render(gc);
                 pelota.changeDir();
 
             }
-            else if (pelota.getBoundary().intersects(platform2.getBoundary())){
-                pelota.setPosY(platform2.getHeight());
+            else if (pelota.getBoundary().intersects(platform4.getBoundary())){
+                pelota.setPosY(platform4.getHeight()+separacion);
+                pelota.render(gc);
+                pelota.changeDir();
+
+            }
+            else if (pelota.getBoundary().intersects(platform3.getBoundary())){
+                pelota.setPosX((scene.getWidth()-platform3.getWidth()-pelota.getImage().getHeight()-separacion));
+                pelota.render(gc);
+                pelota.changeDir();
+
+            }
+            else if (pelota.getBoundary().intersects(platform.getBoundary())){
+                pelota.setPosX(platform.getWidth()+separacion);
                 pelota.render(gc);
                 pelota.changeDir();
 
@@ -118,6 +130,8 @@ public class Controller implements Initializable {
             pelota.render(gc);
             platform.render(gc);
             platform2.render(gc);
+            platform3.render(gc);
+            platform4.render(gc);
 
         }
     })
@@ -220,20 +234,20 @@ public class Controller implements Initializable {
         platform3 = new Platform();
         platform4 = new Platform();
 
-        platform.setImage(new Image("sample/platform.png"));
+        platform.setImage(new Image("sample/rojo.png"));
         platform.setInitialValue(separacion,scene.getHeight()/2-platform.getHeight()/2);
         platform.render(gc);
 
-        platform2.setImage(new Image("sample/platform2.png"));
+        platform2.setImage(new Image("sample/azul.png"));
         platform2.setInitialValue(scene.getWidth()/2- platform2.getWidth()/2,scene.getHeight()-platform2.getHeight()-separacion);
         System.out.println(platform2.getHeight());
         platform2.render(gc);
 
-        platform3.setImage(new Image("sample/platform3.png"));
+        platform3.setImage(new Image("sample/verde.png"));
         platform3.setInitialValue(scene.getWidth()-platform3.getWidth()-separacion,scene.getHeight()/2-platform.getHeight()/2);
         platform3.render(gc);
 
-        platform4.setImage(new Image("sample/platform4.png"));
+        platform4.setImage(new Image("sample/amarillo.png"));
         platform4.setInitialValue(scene.getWidth()/2- platform4.getWidth()/2,separacion);
         platform4.render(gc);
     }
