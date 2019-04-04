@@ -50,7 +50,7 @@ public class Pelota {
     public void move() {
         if(dirX == 1) {
             posX += velX;
-            if(posX>=400-width) calcularPunto();
+            if(posX>=400) calcularPunto();
 
         }else {
             posX -= velX;
@@ -58,7 +58,7 @@ public class Pelota {
         }
         if(dirY == 1){
             posY += velY;
-            if(posY>=500-height)calcularPunto();
+            if(posY>=500)calcularPunto();
         }
         else {
             posY -= velY;
@@ -100,15 +100,19 @@ public class Pelota {
         switch (punto){
             case "azul":
                 puntos[0]++;
+                punto = "";
                 break;
             case "verde":
                 puntos[1]++;
+                punto = "";
                 break;
             case "rojo":
                 puntos[2]++;
+                punto = "";
                 break;
             case "amarillo":
                 puntos[3]++;
+                punto = "";
                 break;
         }
     }

@@ -118,12 +118,6 @@ public class Controller implements Initializable {
                 }
                 platform4.render(gc);
             }
-            esqIzqAbaj.render(gc);
-            esqDerAbaj.render(gc);
-            esqIzqArri.render(gc);
-            esqDerArri.render(gc);
-
-
 
         }
 
@@ -132,6 +126,8 @@ public class Controller implements Initializable {
     Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.017), new EventHandler<ActionEvent>(){
         @Override
         public void handle(ActionEvent event) {
+            gc.clearRect(0, 0, scene.getWidth(), scene.getHeight());
+
             PerformanceTracker perfTracker = PerformanceTracker.getSceneTracker(mainCanvas.getScene());
             // System.out.println(("FPS (Timeline) = " + perfTracker.getInstantFPS()));
             pelota.clear(gc);
@@ -170,6 +166,17 @@ public class Controller implements Initializable {
             platform2.render(gc);
             platform3.render(gc);
             platform4.render(gc);
+
+            esqIzqAbaj.render(gc);
+            esqDerAbaj.render(gc);
+            esqIzqArri.render(gc);
+            esqDerArri.render(gc);
+
+
+            gc.fillText(String.valueOf(pelota.getPuntos()[0]), esqIzqAbaj.getPosX() + 10, esqIzqAbaj.getPosY() + 20);
+            gc.fillText(String.valueOf(pelota.getPuntos()[1]), esqDerAbaj.getPosX() + 10, esqDerAbaj.getPosY() + 20);
+            gc.fillText(String.valueOf(pelota.getPuntos()[2]), esqIzqArri.getPosX() + 10, esqIzqArri.getPosY() + 20);
+            gc.fillText(String.valueOf(pelota.getPuntos()[3]), esqDerArri.getPosX() + 10, esqDerArri.getPosY() + 20);
 
         }
     })
@@ -243,6 +250,8 @@ public class Controller implements Initializable {
         });
 
 
+
+
     }
 
     public void setPlatform(Platform platform) {
@@ -308,6 +317,8 @@ public class Controller implements Initializable {
         platform4.setImage(new Image("sample/amarillo.png"));
         platform4.setInitialValue(scene.getWidth()/2- platform4.getWidth()/2,separacion);
         platform4.render(gc);
+
+
     }
 
     public void movimientoPelotas(){
