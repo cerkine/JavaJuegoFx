@@ -154,32 +154,38 @@ public class Controller implements Initializable {
             platform2.render(gc);
             platform3.render(gc);
             platform4.render(gc);
+
             esqIzqArri.render(gc);
             esqDerArri.render(gc);
             esqDerAbaj.render(gc);
             esqIzqAbaj.render(gc);
 
-            esqIzqAbaj.render(gc);
-            esqDerAbaj.render(gc);
-            esqIzqArri.render(gc);
-            esqDerArri.render(gc);
 
+            puntosPelota(pelota1, pelota2, pelota3, pelota4);
 
-            gc.setFill(Color.BLUE);
-            gc.fillText(String.valueOf(pelota.getPuntos()[0]), esqIzqAbaj.getPosX() + 10, esqIzqAbaj.getPosY() + 20);
-
-            gc.setFill(Color.GREEN);
-            gc.fillText(String.valueOf(pelota.getPuntos()[1]), esqDerAbaj.getPosX() + 10, esqDerAbaj.getPosY() + 20);
-
-            gc.setFill(Color.RED);
-            gc.fillText(String.valueOf(pelota.getPuntos()[2]), esqIzqArri.getPosX() + 10, esqIzqArri.getPosY() + 20);
-
-            gc.setFill(Color.YELLOW);
-            gc.fillText(String.valueOf(pelota.getPuntos()[3]), esqDerArri.getPosX() + 10, esqDerArri.getPosY() + 20);
 
         }
     })
     );
+
+    private void puntosPelota(Pelota pelota1, Pelota pelota2, Pelota pelota3, Pelota pelota4) {
+        int puntosAzul = pelota1.getPuntos()[0] + pelota2.getPuntos()[0] + pelota3.getPuntos()[0] + pelota4.getPuntos()[0];
+        int puntosVerde = pelota1.getPuntos()[1] + pelota2.getPuntos()[1] + pelota3.getPuntos()[1] + pelota4.getPuntos()[1];
+        int puntosRojo = pelota1.getPuntos()[2] + pelota2.getPuntos()[2] + pelota3.getPuntos()[2] + pelota4.getPuntos()[2];
+        int puntosAmarillo = pelota1.getPuntos()[3] + pelota2.getPuntos()[3] + pelota3.getPuntos()[3] + pelota4.getPuntos()[3];
+
+        gc.setFill(Color.BLUE);
+        gc.fillText(String.valueOf(puntosAzul), esqIzqAbaj.getPosX() + 10, esqIzqAbaj.getPosY() + 20);
+
+        gc.setFill(Color.GREEN);
+        gc.fillText(String.valueOf(puntosVerde), esqDerAbaj.getPosX() + 10, esqDerAbaj.getPosY() + 20);
+
+        gc.setFill(Color.RED);
+        gc.fillText(String.valueOf(puntosRojo), esqIzqArri.getPosX() + 10, esqIzqArri.getPosY() + 20);
+
+        gc.setFill(Color.YELLOW);
+        gc.fillText(String.valueOf(puntosAmarillo), esqDerArri.getPosX() + 10, esqDerArri.getPosY() + 20);
+    }
 
     private void collisions(Pelota pelota) {
         if (pelota.getBoundary().intersects(platform2.getBoundary())){
