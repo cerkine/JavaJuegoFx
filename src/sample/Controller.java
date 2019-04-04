@@ -173,9 +173,16 @@ public class Controller implements Initializable {
             esqDerArri.render(gc);
 
 
+            gc.setFill(Color.BLUE);
             gc.fillText(String.valueOf(pelota.getPuntos()[0]), esqIzqAbaj.getPosX() + 10, esqIzqAbaj.getPosY() + 20);
+
+            gc.setFill(Color.GREEN);
             gc.fillText(String.valueOf(pelota.getPuntos()[1]), esqDerAbaj.getPosX() + 10, esqDerAbaj.getPosY() + 20);
+
+            gc.setFill(Color.RED);
             gc.fillText(String.valueOf(pelota.getPuntos()[2]), esqIzqArri.getPosX() + 10, esqIzqArri.getPosY() + 20);
+
+            gc.setFill(Color.YELLOW);
             gc.fillText(String.valueOf(pelota.getPuntos()[3]), esqDerArri.getPosX() + 10, esqDerArri.getPosY() + 20);
 
         }
