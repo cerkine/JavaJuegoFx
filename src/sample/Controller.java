@@ -22,6 +22,7 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -58,6 +59,8 @@ public class Controller implements Initializable {
     private Pelota pelota2;
     private Pelota pelota3;
     private Pelota pelota4;
+
+    private int contadorPelotaNueva;
 
 
     private GraphicsContext gc;
@@ -163,8 +166,10 @@ public class Controller implements Initializable {
 
 
             puntosPelota(pelota1, pelota2, pelota3, pelota4);
-
-
+            if (pelota1.isEliminar())pelota1 = crearPelota(pelota1);
+            if (pelota2.isEliminar())pelota2 = crearPelota(pelota2);
+            if (pelota3.isEliminar())pelota3 = crearPelota(pelota3);
+            if (pelota4.isEliminar())pelota4 = crearPelota(pelota4);
         }
     })
     );
@@ -431,7 +436,7 @@ public class Controller implements Initializable {
     public void movimientoPelotas(){
         gc = mainCanvas.getGraphicsContext2D();
         gc.setFill(Color.RED);
-
+        contadorPelotaNueva = 0;
         pelota1 = new Pelota();
         pelota2 = new Pelota();
         pelota3 = new Pelota();
@@ -449,6 +454,15 @@ public class Controller implements Initializable {
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
 
+    }
+    private Pelota crearPelota(Pelota pelota){
+        Random random = new Random();
+        pelota.setPosX(scene.getWidth()/(random.nextInt(2)+2));
+        pelota.setPosY(scene.getHeight()/(random.nextInt(2)+2));
+        pelota.setImage(new Image("sample/ball_gris.png"));
+        pelota.render(gc);
+        pelota.setEliminar(false);
+        return pelota;
     }
 
 }

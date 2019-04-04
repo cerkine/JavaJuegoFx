@@ -12,6 +12,15 @@ public class Pelota {
     private double posX, posY, velX, velY, width, height;
     private int[] puntos;
     private int dirX, dirY;
+    private boolean eliminar;
+
+    public boolean isEliminar() {
+        return eliminar;
+    }
+
+    public void setEliminar(boolean eliminar) {
+        this.eliminar = eliminar;
+    }
 
     public Image getImage() {
         return image;
@@ -115,6 +124,7 @@ public class Pelota {
                 punto = "";
                 break;
         }
+        eliminar = true;
     }
 
     public void setInicio(double x, double y) {
