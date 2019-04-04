@@ -24,8 +24,8 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     @FXML private Canvas mainCanvas;
-    final int separacion = 10;
-    Image esquina;
+    private final int separacion = 10;
+    private Image esquina;
 
     private BooleanProperty leftPressed = new SimpleBooleanProperty();
     private BooleanProperty rightPressed = new SimpleBooleanProperty();
@@ -52,7 +52,11 @@ public class Controller implements Initializable {
     private Platform esqIzqArri;
     private Platform esqIzqAbaj;
 
-    private Pelota pelota;
+    private Pelota pelota1;
+    private Pelota pelota2;
+    private Pelota pelota3;
+    private Pelota pelota4;
+
 
     private GraphicsContext gc;
     private Scene scene;
@@ -129,46 +133,70 @@ public class Controller implements Initializable {
         public void handle(ActionEvent event) {
             PerformanceTracker perfTracker = PerformanceTracker.getSceneTracker(mainCanvas.getScene());
             // System.out.println(("FPS (Timeline) = " + perfTracker.getInstantFPS()));
-            pelota.clear(gc);
-            pelota.move();
-            if (pelota.getBoundary().intersects(platform2.getBoundary())){
-                pelota.setPosY(scene.getHeight()-platform2.getHeight()-pelota.getImage().getHeight()-separacion);
-                pelota.render(gc);
-                pelota.changeDir();
-                pelota.setPunto("azul");
-
-            }
-            else if (pelota.getBoundary().intersects(platform4.getBoundary())){
-                pelota.setPosY(platform4.getHeight()+separacion);
-                pelota.render(gc);
-                pelota.changeDir();
-                pelota.setPunto("amarillo");
-
-
-            }
-            else if (pelota.getBoundary().intersects(platform3.getBoundary())){
-                pelota.setPosX((scene.getWidth()-platform3.getWidth()-pelota.getImage().getHeight()-separacion));
-                pelota.render(gc);
-                pelota.changeDir();
-                pelota.setPunto("verde");
-
-
-            }
-            else if (pelota.getBoundary().intersects(platform.getBoundary())){
-                pelota.setPosX(platform.getWidth()+separacion);
-                pelota.render(gc);
-                pelota.changeDir();
-                pelota.setPunto("rojo");
-            }
-            pelota.render(gc);
+            pelota1.clear(gc);
+            pelota2.clear(gc);
+            pelota3.clear(gc);
+            pelota4.clear(gc);
+            pelota1.move();
+            pelota2.move();
+            pelota3.move();
+            pelota4.move();
+            collisions(pelota1);
+            collisions(pelota2);
+            collisions(pelota3);
+            collisions(pelota4);
+            pelota1.render(gc);
+            pelota2.render(gc);
+            pelota3.render(gc);
+            pelota4.render(gc);
             platform.render(gc);
             platform2.render(gc);
             platform3.render(gc);
             platform4.render(gc);
+            esqIzqArri.render(gc);
+            esqDerArri.render(gc);
+            esqDerAbaj.render(gc);
+            esqIzqAbaj.render(gc);
 
         }
     })
     );
+
+    private void collisions(Pelota pelota) {
+        if (pelota.getBoundary().intersects(platform2.getBoundary())){
+            pelota.setPosY(scene.getHeight()-platform2.getHeight()-pelota.getImage().getHeight()-separacion);
+            pelota.render(gc);
+            pelota.changeDir();
+            pelota.setImage(new Image("sample/ball_azul.png"));
+            pelota.setPunto("azul");
+
+        }
+        else if (pelota.getBoundary().intersects(platform4.getBoundary())){
+            pelota.setPosY(platform4.getHeight()+separacion);
+            pelota.render(gc);
+            pelota.changeDir();
+            pelota.setImage(new Image("sample/ball_amarillo.png"));
+            pelota.setPunto("amarillo");
+
+
+        }
+        else if (pelota.getBoundary().intersects(platform3.getBoundary())){
+            pelota.setPosX((scene.getWidth()-platform3.getWidth()-pelota.getImage().getHeight()-separacion));
+            pelota.render(gc);
+            pelota.changeDir();
+            pelota.setImage(new Image("sample/ball_verde.png"));
+            pelota.setPunto("verde");
+
+
+        }
+        else if (pelota.getBoundary().intersects(platform.getBoundary())){
+            pelota.setPosX(platform.getWidth()+separacion);
+            pelota.render(gc);
+            pelota.changeDir();
+            pelota.setImage(new Image("sample/ball_roja.png"));
+            pelota.setPunto("rojo");
+        }
+    }
 
 
     public void setScene(Scene sc) {
@@ -235,6 +263,7 @@ public class Controller implements Initializable {
             if (e.getCode() == KeyCode.NUMPAD9) {
                 nuevePressed.set(false);
             }
+
         });
 
 
@@ -310,12 +339,23 @@ public class Controller implements Initializable {
         gc = mainCanvas.getGraphicsContext2D();
         gc.setFill(Color.RED);
 
-        pelota = new Pelota();
+        pelota1 = new Pelota();
+        pelota2 = new Pelota();
+        pelota3 = new Pelota();
+        pelota4 = new Pelota();
+        pelota1.setInicio(scene.getWidth()/2,scene.getHeight()/2);
+        pelota2.setInicio(scene.getWidth()/3,scene.getHeight()/3);
+        pelota3.setInicio(scene.getWidth()/2,scene.getHeight()/3);
+        pelota4.setInicio(scene.getWidth()/3,scene.getHeight()/2);
 
-        pelota.setImage(new Image("sample/ball.png"));
 
+        pelota1.setImage(new Image("sample/ball_gris.png"));
+        pelota2.setImage(new Image("sample/ball_gris.png"));
+        pelota3.setImage(new Image("sample/ball_gris.png"));
+        pelota4.setImage(new Image("sample/ball_gris.png"));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
 
     }
+
 }

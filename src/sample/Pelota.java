@@ -106,6 +106,11 @@ public class Pelota {
         }
     }
 
+    public void setInicio(double x, double y) {
+        posX = x;
+        posY = y;
+    }
+
 //    public void setDirection(String direction) {
 //        switch (direction) {
 //            case "RIGHT": dirX = 1;  break;
