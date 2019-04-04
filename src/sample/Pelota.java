@@ -12,6 +12,15 @@ public class Pelota {
     private double posX, posY, velX, velY, width, height;
     private int[] puntos;
     private int dirX, dirY;
+    private boolean eliminar;
+
+    public boolean isEliminar() {
+        return eliminar;
+    }
+
+    public void setEliminar(boolean eliminar) {
+        this.eliminar = eliminar;
+    }
 
     public Image getImage() {
         return image;
@@ -37,6 +46,7 @@ public class Pelota {
             puntos[i] = 0;
         }
         punto = "";
+        eliminar = false;
     }
 
     public void setPosX(double posX) {
@@ -50,19 +60,27 @@ public class Pelota {
     public void move() {
         if(dirX == 1) {
             posX += velX;
-            if(posX>=400) calcularPunto();
+            if(posX>=600){
+                calcularPunto();
+            }
 
         }else {
             posX -= velX;
-            if(posX<=0) calcularPunto();
+            if(posX<=0-width) {
+                calcularPunto();
+            }
         }
         if(dirY == 1){
             posY += velY;
-            if(posY>=500)calcularPunto();
+            if(posY>=600){
+                calcularPunto();
+            }
         }
         else {
             posY -= velY;
-            if(posY<=0)calcularPunto();
+            if(posY<=0-height){
+                calcularPunto();
+            }
         }
     }
 
@@ -115,6 +133,7 @@ public class Pelota {
                 punto = "";
                 break;
         }
+        eliminar = true;
     }
 
     public void setInicio(double x, double y) {
