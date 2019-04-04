@@ -50,7 +50,7 @@ public class Pelota {
     public void move() {
         if(dirX == 1) {
             posX += velX;
-            if(posX>=400) calcularPunto();
+            if(posX>=600) calcularPunto();
 
         }else {
             posX -= velX;
@@ -58,7 +58,7 @@ public class Pelota {
         }
         if(dirY == 1){
             posY += velY;
-            if(posY>=500)calcularPunto();
+            if(posY>=600)calcularPunto();
         }
         else {
             posY -= velY;
@@ -121,13 +121,4 @@ public class Pelota {
         posX = x;
         posY = y;
     }
-
-//    public void setDirection(String direction) {
-//        switch (direction) {
-//            case "RIGHT": dirX = 1;  break;
-//            case "LEFT": dirX= -1; break;
-//            case "DOWN": dirY = 1; break;
-//            case "UP": dirY = -1;break;
-//        }
-//    }
 }

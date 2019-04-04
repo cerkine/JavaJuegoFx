@@ -146,6 +146,7 @@ public class Controller implements Initializable {
             collisions(pelota2);
             collisions(pelota3);
             collisions(pelota4);
+            ballToBallCollisions(pelota1, pelota2, pelota3, pelota4);
             pelota1.render(gc);
             pelota2.render(gc);
             pelota3.render(gc);
@@ -167,6 +168,54 @@ public class Controller implements Initializable {
         }
     })
     );
+
+    private void ballToBallCollisions(Pelota pelota1, Pelota pelota2, Pelota pelota3, Pelota pelota4) {
+        if (pelota1.getBoundary().intersects(pelota2.getBoundary())){
+            pelota1.render(gc);
+            pelota2.render(gc);
+
+            pelota1.changeDir();
+            pelota2.render(gc);
+        }
+        else if (pelota1.getBoundary().intersects(pelota3.getBoundary())){
+            pelota1.render(gc);
+            pelota3.render(gc);
+
+            pelota1.changeDir();
+            pelota3.render(gc);
+        }
+
+        else if (pelota1.getBoundary().intersects(pelota4.getBoundary())){
+            pelota1.render(gc);
+            pelota4.render(gc);
+
+            pelota1.changeDir();
+            pelota4.render(gc);
+        }
+
+        else if (pelota2.getBoundary().intersects(pelota3.getBoundary())){
+            pelota2.render(gc);
+            pelota3.render(gc);
+
+            pelota2.changeDir();
+            pelota3.render(gc);
+        }
+
+        else if (pelota2.getBoundary().intersects(pelota4.getBoundary())){
+            pelota2.render(gc);
+            pelota4.render(gc);
+
+            pelota2.changeDir();
+            pelota4.render(gc);
+        }
+        else if (pelota3.getBoundary().intersects(pelota4.getBoundary())){
+            pelota3.render(gc);
+            pelota4.render(gc);
+
+            pelota3.changeDir();
+            pelota4.render(gc);
+        }
+    }
 
     private void puntosPelota(Pelota pelota1, Pelota pelota2, Pelota pelota3, Pelota pelota4) {
         int puntosAzul = pelota1.getPuntos()[0] + pelota2.getPuntos()[0] + pelota3.getPuntos()[0] + pelota4.getPuntos()[0];
@@ -220,6 +269,22 @@ public class Controller implements Initializable {
             pelota.changeDir();
             pelota.setImage(new Image("sample/ball_roja.png"));
             pelota.setPunto("rojo");
+        }
+        else if (pelota.getBoundary().intersects(esqDerAbaj.getBoundary())){
+            pelota.render(gc);
+            pelota.changeDir();
+        }
+        else if (pelota.getBoundary().intersects(esqDerArri.getBoundary())){
+            pelota.render(gc);
+            pelota.changeDir();
+        }
+        else if (pelota.getBoundary().intersects(esqIzqAbaj.getBoundary())){
+            pelota.render(gc);
+            pelota.changeDir();
+        }
+        else if (pelota.getBoundary().intersects(esqIzqArri.getBoundary())){
+            pelota.render(gc);
+            pelota.changeDir();
         }
     }
 
