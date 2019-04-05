@@ -1,10 +1,8 @@
 package sample;
 
-import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class Pelota {
     private Image image;
@@ -13,6 +11,14 @@ public class Pelota {
     private int[] puntos;
     private int dirX, dirY;
     private boolean eliminar;
+
+    public void setVelX(double velX) {
+        this.velX = velX;
+    }
+
+    public void setVelY(double velY) {
+        this.velY = velY;
+    }
 
     public boolean isEliminar() {
         return eliminar;
@@ -45,7 +51,7 @@ public class Pelota {
         for (int i = 0; i < puntos.length; i++) {
             puntos[i] = 0;
         }
-        punto = "";
+        punto = "gris";
     }
 
     public void setPosX(double posX) {
@@ -59,20 +65,23 @@ public class Pelota {
     public void move() {
         if(dirX == 1) {
             posX += velX;
-            if(posX>=600) calcularPunto();
 
         }else {
             posX -= velX;
-            if(posX<=0) calcularPunto();
         }
         if(dirY == 1){
             posY += velY;
-            if(posY>=600)calcularPunto();
         }
         else {
             posY -= velY;
-            if(posY<=0)calcularPunto();
         }
+
+        if(posX>=600) calcularPunto("verde");
+        if(posX<=-image.getWidth()) calcularPunto("rojo");
+        if(posY>=600)calcularPunto("azul");
+        if(posY<=-image.getWidth())calcularPunto("amarillo");
+
+
     }
 
     public void render(GraphicsContext gc) {
@@ -94,7 +103,60 @@ public class Pelota {
     }
 
 
+    public void changeDir(String color) {
+        double i = (Math.random()*10)%2;
+
+        System.out.println(i);
+        switch (color){
+            case "azul":
+                velY = -velY *i;
+                break;
+            case "verde":
+                velX = -velX *i;
+                break;
+            case "amarillo":
+                velY = -velY *i;
+                break;
+            case "rojo":
+                velX = -velX *i;
+                break;
+        }
+        double limitelento = 1.5;
+        if (velY < limitelento && velY> -limitelento){
+            if (velY < 0){
+                velY = -limitelento;
+            }else{
+                velY = limitelento;
+            }
+        }
+        if (velX < limitelento && velX> -limitelento){
+            if (velX < 0){
+                velX = -limitelento;
+            }else{
+                velX = limitelento;
+            }
+        }
+
+        int limit = 5;
+        if (velY < -limit || velY> limit){
+            if (velY < 0){
+                velY = -limit;
+            }else{
+                velY = limit;
+            }
+        }
+        if (velX < -limit || velX> limit){
+            if (velX < 0){
+                velX = -limit;
+            }else{
+                velX = limit;
+            }
+        }
+
+    }
+
     public void changeDir() {
+
         double t = Math.random();
         if(0.33 > t) dirX = dirX*(-1);
         if(0.33 < t && 0.66 > t) dirY = dirY*(-1);
@@ -105,23 +167,51 @@ public class Pelota {
 
     }
 
-    public void calcularPunto(){
+    public void calcularPunto(String recibe){
         switch (punto){
             case "azul":
-                puntos[0]++;
-                punto = "";
+                if (!recibe.equals("azul")) {
+                    puntos[0]++;
+                    punto = "gris";
+                }
                 break;
             case "verde":
-                puntos[1]++;
-                punto = "";
+                if (!recibe.equals("verde")) {
+                    puntos[1]++;
+                    punto = "gris";
+                }
                 break;
             case "rojo":
-                puntos[2]++;
-                punto = "";
+                if (!recibe.equals("rojo")) {
+                    puntos[2]++;
+                    punto = "gris";
+                }
                 break;
             case "amarillo":
-                puntos[3]++;
-                punto = "";
+                if (!recibe.equals("amarillo")) {
+                    puntos[3]++;
+                    punto = "gris";
+                }
+                break;
+            case "gris":
+                switch (recibe){
+                    case "azul":
+                        puntos[0]--;
+                        punto = "gris";
+                        break;
+                    case "verde":
+                        puntos[1]--;
+                        punto = "gris";
+                        break;
+                    case "rojo":
+                        puntos[2]--;
+                        punto = "gris";
+                        break;
+                    case "amarillo":
+                        puntos[3]--;
+                        punto = "gris";
+                        break;
+                }
                 break;
         }
         eliminar = true;

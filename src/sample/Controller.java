@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -41,6 +42,12 @@ public class Controller implements Initializable {
 
     private BooleanProperty seisPressed = new SimpleBooleanProperty();
     private BooleanProperty nuevePressed = new SimpleBooleanProperty();
+
+    private boolean finish = false;
+    private Font winner =  new Font(20);
+    private Font normal =  new Font(12);
+
+
 
 
     private BooleanBinding anyPressed = aPressed.or(qPressed.or(leftPressed.or(rightPressed.or(vPressed.or(bPressed.or(seisPressed.or(nuevePressed)))))));
@@ -166,10 +173,12 @@ public class Controller implements Initializable {
 
 
             puntosPelota(pelota1, pelota2, pelota3, pelota4);
-            if (pelota1.isEliminar())pelota1 = crearPelota(pelota1);
-            if (pelota2.isEliminar())pelota2 = crearPelota(pelota2);
-            if (pelota3.isEliminar())pelota3 = crearPelota(pelota3);
-            if (pelota4.isEliminar())pelota4 = crearPelota(pelota4);
+
+                if (pelota1.isEliminar()) pelota1 = crearPelota(pelota1);
+                if (pelota2.isEliminar()) pelota2 = crearPelota(pelota2);
+                if (pelota3.isEliminar()) pelota3 = crearPelota(pelota3);
+                if (pelota4.isEliminar()) pelota4 = crearPelota(pelota4);
+
         }
     })
     );
@@ -223,6 +232,7 @@ public class Controller implements Initializable {
     }
 
     private void puntosPelota(Pelota pelota1, Pelota pelota2, Pelota pelota3, Pelota pelota4) {
+        gc.setFont(normal);
         int puntosAzul = pelota1.getPuntos()[0] + pelota2.getPuntos()[0] + pelota3.getPuntos()[0] + pelota4.getPuntos()[0];
         int puntosVerde = pelota1.getPuntos()[1] + pelota2.getPuntos()[1] + pelota3.getPuntos()[1] + pelota4.getPuntos()[1];
         int puntosRojo = pelota1.getPuntos()[2] + pelota2.getPuntos()[2] + pelota3.getPuntos()[2] + pelota4.getPuntos()[2];
@@ -239,13 +249,42 @@ public class Controller implements Initializable {
 
         gc.setFill(Color.YELLOW);
         gc.fillText(String.valueOf(puntosAmarillo), esqDerArri.getPosX() + 10, esqDerArri.getPosY() + 20);
+
+        gc.setFont(winner);
+
+        if (puntosAzul == 5){
+
+            gc.setFill(Color.BLUE);
+            gc.fillText("BLUE WINS", scene.getWidth()/2 - 40, scene.getHeight()/2);
+            timeline.stop();
+            timer.stop();
+        }
+        else if (puntosVerde == 5){
+            gc.setFill(Color.GREEN);
+            gc.fillText("GREEN WINS", scene.getWidth()/2 - 40, scene.getHeight()/2);
+            timeline.stop();
+            timer.stop();
+
+        }
+        else if (puntosRojo == 5){
+            gc.setFill(Color.RED);
+            gc.fillText("RED WINS", scene.getWidth()/2 - 40, scene.getHeight()/2);
+            timeline.stop();
+            timer.stop();
+        }
+        else if (puntosAmarillo == 5){
+            gc.setFill(Color.YELLOW);
+            gc.fillText("YELLOW WINS", scene.getWidth()/2 - 40, scene.getHeight()/2);
+            timeline.stop();
+            timer.stop();
+        }
     }
 
     private void collisions(Pelota pelota) {
         if (pelota.getBoundary().intersects(platform2.getBoundary())){
             pelota.setPosY(scene.getHeight()-platform2.getHeight()-pelota.getImage().getHeight()-separacion);
             pelota.render(gc);
-            pelota.changeDir();
+            pelota.changeDir("azul");
             pelota.setImage(new Image("sample/ball_azul.png"));
             pelota.setPunto("azul");
 
@@ -253,7 +292,7 @@ public class Controller implements Initializable {
         else if (pelota.getBoundary().intersects(platform4.getBoundary())){
             pelota.setPosY(platform4.getHeight()+separacion);
             pelota.render(gc);
-            pelota.changeDir();
+            pelota.changeDir("amarillo");
             pelota.setImage(new Image("sample/ball_amarillo.png"));
             pelota.setPunto("amarillo");
 
@@ -262,7 +301,7 @@ public class Controller implements Initializable {
         else if (pelota.getBoundary().intersects(platform3.getBoundary())){
             pelota.setPosX((scene.getWidth()-platform3.getWidth()-pelota.getImage().getHeight()-separacion));
             pelota.render(gc);
-            pelota.changeDir();
+            pelota.changeDir("verde");
             pelota.setImage(new Image("sample/ball_verde.png"));
             pelota.setPunto("verde");
 
@@ -271,7 +310,7 @@ public class Controller implements Initializable {
         else if (pelota.getBoundary().intersects(platform.getBoundary())){
             pelota.setPosX(platform.getWidth()+separacion);
             pelota.render(gc);
-            pelota.changeDir();
+            pelota.changeDir("rojo");
             pelota.setImage(new Image("sample/ball_roja.png"));
             pelota.setPunto("rojo");
         }
@@ -460,6 +499,17 @@ public class Controller implements Initializable {
         pelota.setPosX(scene.getWidth()/(random.nextInt(2)+2));
         pelota.setPosY(scene.getHeight()/(random.nextInt(2)+2));
         pelota.setImage(new Image("sample/ball_gris.png"));
+        if (Math.random()*10%2<1){
+            pelota.setVelX(-2);
+        }else{
+            pelota.setVelX(2);
+        }
+        if (Math.random()*10%2<1){
+            pelota.setVelY(-2);
+        }else{
+            pelota.setVelY(2);
+        }
+
         pelota.render(gc);
         pelota.setEliminar(false);
         return pelota;
