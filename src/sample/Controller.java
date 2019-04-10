@@ -17,12 +17,16 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -68,6 +72,9 @@ public class Controller implements Initializable {
     private Pelota pelota4;
 
     private int contadorPelotaNueva;
+
+    private AudioClip audioClip = new AudioClip(getClass().getClassLoader().getResource("sample/platformcoll.wav").toExternalForm());
+
 
 
     private GraphicsContext gc;
@@ -287,6 +294,7 @@ public class Controller implements Initializable {
             pelota.changeDir("azul");
             pelota.setImage(new Image("sample/ball_azul.png"));
             pelota.setPunto("azul");
+            audioClip.play();
 
         }
         else if (pelota.getBoundary().intersects(platform4.getBoundary())){
@@ -295,7 +303,7 @@ public class Controller implements Initializable {
             pelota.changeDir("amarillo");
             pelota.setImage(new Image("sample/ball_amarillo.png"));
             pelota.setPunto("amarillo");
-
+            audioClip.play();
 
         }
         else if (pelota.getBoundary().intersects(platform3.getBoundary())){
@@ -304,6 +312,7 @@ public class Controller implements Initializable {
             pelota.changeDir("verde");
             pelota.setImage(new Image("sample/ball_verde.png"));
             pelota.setPunto("verde");
+            audioClip.play();
 
 
         }
@@ -313,6 +322,8 @@ public class Controller implements Initializable {
             pelota.changeDir("rojo");
             pelota.setImage(new Image("sample/ball_roja.png"));
             pelota.setPunto("rojo");
+            audioClip.play();
+
         }
         else if (pelota.getBoundary().intersects(esqDerAbaj.getBoundary())){
             pelota.render(gc);
@@ -330,6 +341,10 @@ public class Controller implements Initializable {
             pelota.render(gc);
             pelota.changeDir();
         }
+
+
+
+
     }
 
 
