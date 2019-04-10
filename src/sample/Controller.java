@@ -8,12 +8,14 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -32,6 +34,9 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     @FXML private Canvas mainCanvas;
+    @FXML private Text textA,textB, textRight,textLeft, textNueve,textSeis,textV,textQ,textControl;
+    @FXML private Button btnStart;
+    boolean empezar;
     private final int separacion = 10;
     private Image esquina;
 
@@ -147,45 +152,45 @@ public class Controller implements Initializable {
     Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.017), new EventHandler<ActionEvent>(){
         @Override
         public void handle(ActionEvent event) {
-            gc.clearRect(0, 0, scene.getWidth(), scene.getHeight());
+            if (empezar) {
+                gc.clearRect(0, 0, scene.getWidth(), scene.getHeight());
 
-            PerformanceTracker perfTracker = PerformanceTracker.getSceneTracker(mainCanvas.getScene());
-            // System.out.println(("FPS (Timeline) = " + perfTracker.getInstantFPS()));
-            pelota1.clear(gc);
-            pelota2.clear(gc);
-            pelota3.clear(gc);
-            pelota4.clear(gc);
-            pelota1.move();
-            pelota2.move();
-            pelota3.move();
-            pelota4.move();
-            collisions(pelota1);
-            collisions(pelota2);
-            collisions(pelota3);
-            collisions(pelota4);
-            ballToBallCollisions(pelota1, pelota2, pelota3, pelota4);
-            pelota1.render(gc);
-            pelota2.render(gc);
-            pelota3.render(gc);
-            pelota4.render(gc);
-            platform.render(gc);
-            platform2.render(gc);
-            platform3.render(gc);
-            platform4.render(gc);
+                PerformanceTracker perfTracker = PerformanceTracker.getSceneTracker(mainCanvas.getScene());
+                // System.out.println(("FPS (Timeline) = " + perfTracker.getInstantFPS()));
+                pelota1.clear(gc);
+                pelota2.clear(gc);
+                pelota3.clear(gc);
+                pelota4.clear(gc);
+                pelota1.move();
+                pelota2.move();
+                pelota3.move();
+                pelota4.move();
+                collisions(pelota1);
+                collisions(pelota2);
+                collisions(pelota3);
+                collisions(pelota4);
+                ballToBallCollisions(pelota1, pelota2, pelota3, pelota4);
+                pelota1.render(gc);
+                pelota2.render(gc);
+                pelota3.render(gc);
+                pelota4.render(gc);
+                platform.render(gc);
+                platform2.render(gc);
+                platform3.render(gc);
+                platform4.render(gc);
 
-            esqIzqArri.render(gc);
-            esqDerArri.render(gc);
-            esqDerAbaj.render(gc);
-            esqIzqAbaj.render(gc);
+                esqIzqArri.render(gc);
+                esqDerArri.render(gc);
+                esqDerAbaj.render(gc);
+                esqIzqAbaj.render(gc);
 
 
-            puntosPelota(pelota1, pelota2, pelota3, pelota4);
-
+                puntosPelota(pelota1, pelota2, pelota3, pelota4);
                 if (pelota1.isEliminar()) pelota1 = crearPelota(pelota1);
                 if (pelota2.isEliminar()) pelota2 = crearPelota(pelota2);
                 if (pelota3.isEliminar()) pelota3 = crearPelota(pelota3);
                 if (pelota4.isEliminar()) pelota4 = crearPelota(pelota4);
-
+            }
         }
     })
     );
@@ -341,10 +346,6 @@ public class Controller implements Initializable {
             pelota.render(gc);
             pelota.changeDir();
         }
-
-
-
-
     }
 
 
@@ -381,7 +382,7 @@ public class Controller implements Initializable {
         });
         anyPressed.addListener((obs, wasPressed, isNowPressed) -> {
             if (isNowPressed) {
-                timer.start();
+                if (empezar)timer.start();
             } else {
                 timer.stop();
             }
@@ -434,6 +435,24 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        empezar = false;
+
+    }
+    @FXML
+    public void empezarJuego(ActionEvent  event){
+
+        textA.setVisible(empezar);
+        textQ.setVisible(empezar);
+        textB.setVisible(empezar);
+        textV.setVisible(empezar);
+        textSeis.setVisible(empezar);
+        textNueve.setVisible(empezar);
+        textRight.setVisible(empezar);
+        textLeft.setVisible(empezar);
+        textControl.setVisible(empezar);
+        btnStart.setVisible(empezar);
+        this.empezar = !empezar;
+        btnStart.setDisable(empezar);
 
     }
 
