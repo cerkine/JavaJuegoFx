@@ -1,6 +1,5 @@
 package sample;
 
-import com.sun.javafx.perf.PerformanceTracker;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -147,11 +146,11 @@ public class Controller implements Initializable {
             if (empezar) {
                 gc.clearRect(0, 0, scene.getWidth(), scene.getHeight());
 
-                PerformanceTracker perfTracker = PerformanceTracker.getSceneTracker(mainCanvas.getScene());
                 pelota1.clear(gc);
                 pelota2.clear(gc);
                 pelota3.clear(gc);
                 pelota4.clear(gc);
+                gc.drawImage(new Image("sample/fondo.png"),0,0,scene.getWidth(),scene.getHeight());
                 pelota1.move();
                 pelota2.move();
                 pelota3.move();
