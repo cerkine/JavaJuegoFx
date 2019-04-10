@@ -7,11 +7,7 @@ import javafx.scene.image.Image;
 
 public class Platform {
     private Image image;
-    private double posX, posY, velX,velY, width, height;
-
-    public void setPosX(double posX) {
-        this.posX = posX;
-    }
+    private double posX, posY, velX, velY, width, height;
 
     public double getPosX() {
         return posX;
@@ -44,11 +40,11 @@ public class Platform {
     }
 
     public void clear(GraphicsContext gc) {
-        gc.clearRect(posX,posY, width, height);
+        gc.clearRect(posX, posY, width, height);
     }
 
     public Rectangle2D getBoundary() {
-        return new Rectangle2D(posX,posY,width,height);
+        return new Rectangle2D(posX, posY, width, height);
     }
 
 
@@ -57,9 +53,9 @@ public class Platform {
             posX -= velX;
         } else if (direction.equals("right")) {
             posX += velX;
-        }else if (direction.equals("down")) {
+        } else if (direction.equals("down")) {
             posY += velY;
-        }else if (direction.equals("up")) {
+        } else if (direction.equals("up")) {
             posY -= velY;
         }
 

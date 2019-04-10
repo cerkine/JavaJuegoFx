@@ -43,15 +43,20 @@ public class Pelota {
     public Pelota() {
         this.posX = 0.0f;
         this.posY = 0.0f;
-        this.velX = 2.0f;
-        this.velY = 2.0f;
         this.dirX = 1;
         this.dirY = 1;
         puntos = new int[4];
-        for (int i = 0; i < puntos.length; i++) {
-            puntos[i] = 0;
-        }
         punto = "gris";
+        if (Math.random() * 10 % 2 < 1) {
+            this.setVelX(-2);
+        } else {
+            this.setVelX(2);
+        }
+        if (Math.random() * 10 % 2 < 1) {
+            this.setVelY(-2);
+        } else {
+            this.setVelY(2);
+        }
     }
 
     public void setPosX(double posX) {
@@ -63,23 +68,22 @@ public class Pelota {
     }
 
     public void move() {
-        if(dirX == 1) {
+        if (dirX == 1) {
             posX += velX;
 
-        }else {
+        } else {
             posX -= velX;
         }
-        if(dirY == 1){
+        if (dirY == 1) {
             posY += velY;
-        }
-        else {
+        } else {
             posY -= velY;
         }
 
-        if(posX>=600) calcularPunto("verde");
-        if(posX<=-image.getWidth()) calcularPunto("rojo");
-        if(posY>=600)calcularPunto("azul");
-        if(posY<=-image.getWidth())calcularPunto("amarillo");
+        if (posX >= 600) calcularPunto("verde");
+        if (posX <= -image.getWidth()) calcularPunto("rojo");
+        if (posY >= 600) calcularPunto("azul");
+        if (posY <= -image.getWidth()) calcularPunto("amarillo");
 
 
     }
@@ -95,60 +99,60 @@ public class Pelota {
     }
 
     public void clear(GraphicsContext gc) {
-        gc.clearRect(posX,posY, width, height);
+        gc.clearRect(posX, posY, width, height);
     }
 
     public Rectangle2D getBoundary() {
-        return new Rectangle2D(posX,posY,width,height);
+        return new Rectangle2D(posX, posY, width, height);
     }
 
 
     public void changeDir(String color) {
-        double i = (Math.random()*10)%2;
+        double i = (Math.random() * 10) % 2;
 
         System.out.println(i);
-        switch (color){
+        switch (color) {
             case "azul":
-                velY = -velY *i;
+                velY = -velY * i;
                 break;
             case "verde":
-                velX = -velX *i;
+                velX = -velX * i;
                 break;
             case "amarillo":
-                velY = -velY *i;
+                velY = -velY * i;
                 break;
             case "rojo":
-                velX = -velX *i;
+                velX = -velX * i;
                 break;
         }
         double limitelento = 1.5;
-        if (velY < limitelento && velY> -limitelento){
-            if (velY < 0){
+        if (velY < limitelento && velY > -limitelento) {
+            if (velY < 0) {
                 velY = -limitelento;
-            }else{
+            } else {
                 velY = limitelento;
             }
         }
-        if (velX < limitelento && velX> -limitelento){
-            if (velX < 0){
+        if (velX < limitelento && velX > -limitelento) {
+            if (velX < 0) {
                 velX = -limitelento;
-            }else{
+            } else {
                 velX = limitelento;
             }
         }
 
         int limit = 5;
-        if (velY < -limit || velY> limit){
-            if (velY < 0){
+        if (velY < -limit || velY > limit) {
+            if (velY < 0) {
                 velY = -limit;
-            }else{
+            } else {
                 velY = limit;
             }
         }
-        if (velX < -limit || velX> limit){
-            if (velX < 0){
+        if (velX < -limit || velX > limit) {
+            if (velX < 0) {
                 velX = -limit;
-            }else{
+            } else {
                 velX = limit;
             }
         }
@@ -158,17 +162,17 @@ public class Pelota {
     public void changeDir() {
 
         double t = Math.random();
-        if(0.33 > t) dirX = dirX*(-1);
-        if(0.33 < t && 0.66 > t) dirY = dirY*(-1);
-        if(0.66 < t) {
-            dirY = dirY*(-1);
-            dirX = dirX*(-1);
+        if (0.33 > t) dirX = dirX * (-1);
+        if (0.33 < t && 0.66 > t) dirY = dirY * (-1);
+        if (0.66 < t) {
+            dirY = dirY * (-1);
+            dirX = dirX * (-1);
         }
 
     }
 
-    public void calcularPunto(String recibe){
-        switch (punto){
+    public void calcularPunto(String recibe) {
+        switch (punto) {
             case "azul":
                 if (!recibe.equals("azul")) {
                     puntos[0]++;
@@ -194,7 +198,7 @@ public class Pelota {
                 }
                 break;
             case "gris":
-                switch (recibe){
+                switch (recibe) {
                     case "azul":
                         puntos[0]--;
                         punto = "gris";

@@ -17,8 +17,8 @@
       <Text fx:id="textV" layoutX="223.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="V" />
       <Text fx:id="textNueve" layoutX="535.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="9" />
       <Text fx:id="textSeis" layoutX="535.0" layoutY="333.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6" />
-      <Text fx:id="textQ" layoutX="74.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Q" />
-      <Text fx:id="textA" layoutX="74.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
+      <Text fx:id="textQ" layoutX="74.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
+      <Text fx:id="textA" layoutX="74.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Q" />
       <Text fx:id="textControl" layoutX="280.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONTROLS" />
       <Button fx:id="btnStart" layoutX="284.0" layoutY="442.0" mnemonicParsing="false" onAction="#empezarJuego" text="START" />
     </children>
