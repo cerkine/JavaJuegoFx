@@ -144,6 +144,7 @@ public class Controller implements Initializable {
         @Override
         public void handle(ActionEvent event) {
             if (empezar) {
+
                 gc.clearRect(0, 0, scene.getWidth(), scene.getHeight());
 
                 pelota1.clear(gc);
@@ -187,49 +188,43 @@ public class Controller implements Initializable {
 
     private void ballToBallCollisions(Pelota pelota1, Pelota pelota2, Pelota pelota3, Pelota pelota4) {
         if (pelota1.getBoundary().intersects(pelota2.getBoundary())) {
-            pelota1.render(gc);
-            pelota2.render(gc);
-
             pelota1.changeDir();
+            pelota2.changeDir();
+            pelota1.render(gc);
             pelota2.render(gc);
             audioClip2.play();
         } else if (pelota1.getBoundary().intersects(pelota3.getBoundary())) {
-            pelota1.render(gc);
-            pelota3.render(gc);
-
             pelota1.changeDir();
+            pelota3.changeDir();
+            pelota1.render(gc);
             pelota3.render(gc);
             audioClip2.play();
 
         } else if (pelota1.getBoundary().intersects(pelota4.getBoundary())) {
-            pelota1.render(gc);
-            pelota4.render(gc);
-
             pelota1.changeDir();
+            pelota4.changeDir();
+            pelota1.render(gc);
             pelota4.render(gc);
             audioClip2.play();
 
         } else if (pelota2.getBoundary().intersects(pelota3.getBoundary())) {
-            pelota2.render(gc);
-            pelota3.render(gc);
-
             pelota2.changeDir();
+            pelota3.changeDir();
+            pelota2.render(gc);
             pelota3.render(gc);
             audioClip2.play();
 
         } else if (pelota2.getBoundary().intersects(pelota4.getBoundary())) {
-            pelota2.render(gc);
-            pelota4.render(gc);
-
             pelota2.changeDir();
+            pelota4.changeDir();
+            pelota2.render(gc);
             pelota4.render(gc);
             audioClip2.play();
 
         } else if (pelota3.getBoundary().intersects(pelota4.getBoundary())) {
-            pelota3.render(gc);
-            pelota4.render(gc);
-
             pelota3.changeDir();
+            pelota4.changeDir();
+            pelota3.render(gc);
             pelota4.render(gc);
             audioClip2.play();
 
